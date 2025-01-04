@@ -7,9 +7,7 @@ import { ContainerComponent } from "./components/ContainerComponent";
 import { GraphicsComponent } from "./components/GraphicsComponent";
 import { TweenComponent } from "./components/TweenComponent";
 
-import { ContainerSystem } from "./systems/ContainerSystem";
-import { GraphicsSystem } from "./systems/GraphicsSystem";
-import { TweenSystem } from "./systems/TweenSystem";
+import { RenderSystem } from "./systems/RenderSystem";
 
 // export { ECS } from "./ECS";
 // export { Entity } from "./Entity";
@@ -21,9 +19,7 @@ document.body.style.height = "100vh";
 document.body.style.margin = "0";
 
 const ecs = new ECS();
-ecs.addSystem(new ContainerSystem(ecs));
-ecs.addSystem(new GraphicsSystem(ecs));
-ecs.addSystem(new TweenSystem(ecs));
+ecs.addSystem(new RenderSystem(ecs));
 
 const player = ecs.createEntity();
 
@@ -55,7 +51,7 @@ friend.addComponent(new ContainerComponent(player.id));
 const subfriend = ecs.createEntity();
 subfriend.addComponent(new ContainerComponent(friend.id));
 
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 1000; i++) {
   const entity = ecs.createEntity();
 
   entity.addComponent(new ContainerComponent());
