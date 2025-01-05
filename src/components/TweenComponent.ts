@@ -1,10 +1,5 @@
 import { Group } from "@tweenjs/tween.js";
-import { Component } from "../Component";
 
-export class TweenComponent extends Component {
+export class TweenComponent {
   public tweens: Group = new Group();
-
-  constructor() {
-    super();
-  }
 }

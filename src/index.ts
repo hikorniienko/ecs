@@ -5,6 +5,7 @@ import { Tween, Easing } from "@tweenjs/tween.js";
 
 import { ContainerComponent } from "./components/ContainerComponent";
 import { GraphicsComponent } from "./components/GraphicsComponent";
+import { ParentComponent } from "./components/ParentComponent";
 import { TweenComponent } from "./components/TweenComponent";
 
 import { RenderSystem } from "./systems/RenderSystem";
@@ -30,11 +31,11 @@ player.addComponent(new TweenComponent());
 const playerContainer = player.getComponent<ContainerComponent>("ContainerComponent");
 const playerTween = player.getComponent<TweenComponent>("TweenComponent");
 const playerGraphics = player.getComponent<GraphicsComponent>("GraphicsComponent");
-playerGraphics?.graphics.rect(0, 0, 50, 50);
-playerGraphics?.graphics.fill("red");
+playerGraphics?.rect(0, 0, 50, 50);
+playerGraphics?.fill("red");
 
 if (playerContainer && playerTween) {
-  const tween = new Tween(playerContainer.container)
+  const tween = new Tween(playerContainer)
     .to({ x: 100, y: 100 }, 1000)
     .easing(Easing.Quadratic.InOut)
     .repeat(Infinity)
@@ -46,12 +47,19 @@ if (playerContainer && playerTween) {
 }
 
 const friend = ecs.createEntity();
-friend.addComponent(new ContainerComponent(player.id));
+friend.addComponent(new ContainerComponent());
+friend.addComponent(new ParentComponent(player.id));
 
 const subfriend = ecs.createEntity();
-subfriend.addComponent(new ContainerComponent(friend.id));
+subfriend.addComponent(new ContainerComponent());
+subfriend.addComponent(new ParentComponent(player.id));
 
-for (let i = 0; i < 1000; i++) {
+// setTimeout(() => {
+//   player.destroy();
+//   console.log("ecs", ecs);
+// }, 5000);
+
+for (let i = 0; i < 10000; i++) {
   const entity = ecs.createEntity();
 
   entity.addComponent(new ContainerComponent());
@@ -61,14 +69,14 @@ for (let i = 0; i < 1000; i++) {
   const entityContainer = entity.getComponent<ContainerComponent>("ContainerComponent");
   const entityTween = entity.getComponent<TweenComponent>("TweenComponent");
   const entityGraphics = entity.getComponent<GraphicsComponent>("GraphicsComponent");
-  entityGraphics?.graphics.rect(0, 0, 50, 50);
-  entityGraphics?.graphics.fill(Math.floor(Math.random() * 16777215));
+  entityGraphics?.rect(0, 0, 50, 50);
+  entityGraphics?.fill(Math.floor(Math.random() * 16777215));
 
   if (entityContainer && entityTween) {
-    entityContainer.container.x = Math.random() * window.innerWidth;
-    entityContainer.container.y = Math.random() * window.innerHeight;
+    entityContainer.x = Math.random() * window.innerWidth;
+    entityContainer.y = Math.random() * window.innerHeight;
 
-    const tween = new Tween(entityContainer.container)
+    const tween = new Tween(entityContainer)
       .to({ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight }, 1000)
       .easing(Easing.Quadratic.InOut)
       .repeat(Infinity)

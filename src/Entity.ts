@@ -1,15 +1,13 @@
-import type { Component } from "./Component";
-
 export class Entity {
   protected destroyed = false;
-  protected components: Map<string, Component> = new Map();
+  protected components: Map<string, { constructor: Function }> = new Map();
 
   constructor(
     public id: string,
     protected onDestroy: () => void,
   ) {}
 
-  public addComponent(component: Component) {
+  public addComponent(component: { constructor: Function }) {
     this.components.set(component.constructor.name, component);
   }
 
