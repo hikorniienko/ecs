@@ -1,26 +1,26 @@
 export class Entity {
-  protected destroyed = false;
-  protected components: Map<string, { constructor: Function }> = new Map();
+  protected _destroyed = false;
+  protected _components: Map<string, { constructor: Function }> = new Map();
 
   constructor(
     public id: string,
-    protected onDestroy: () => void,
+    protected _onDestroy: () => void,
   ) {}
 
   public addComponent(component: { constructor: Function }) {
-    this.components.set(component.constructor.name, component);
+    this._components.set(component.constructor.name, component);
   }
 
   public getComponent<T>(name: string): T | undefined {
-    return this.components.get(name) as T;
+    return this._components.get(name) as T;
   }
 
   public destroy() {
-    this.destroyed = true;
-    this.onDestroy();
+    this._destroyed = true;
+    this._onDestroy();
   }
 
   public isDestroyed() {
-    return this.destroyed;
+    return this._destroyed;
   }
 }

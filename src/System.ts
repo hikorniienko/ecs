@@ -2,17 +2,17 @@ import type { ECS } from "./ECS";
 import type { Entity } from "./Entity";
 
 export abstract class System {
-  protected destroyed = false;
+  protected _destroyed = false;
 
   constructor(public ecs: ECS) {}
 
   public update(entities: Map<string, Entity>) {}
 
   public destroy() {
-    this.destroyed = true;
+    this._destroyed = true;
   }
 
   public isDestroyed() {
-    return this.destroyed;
+    return this._destroyed;
   }
 }
