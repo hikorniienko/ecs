@@ -9,4 +9,4 @@ export { TweenComponent } from "./components/TweenComponent";
 
 export { RenderSystem } from "./systems/RenderSystem";
 
-export { EventManager } from "./manegers/EventManager";
+export { EventManager } from "./managers/EventManager";
