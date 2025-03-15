@@ -241,6 +241,9 @@ export class ECS {
     this._clearTemporaryData();
 
     this._systems.forEach((system) => {
+      if (!system.isActive) {
+        return;
+      }
       system.execute(deltaTime, elapsedMS);
     });
   }

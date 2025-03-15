@@ -11,6 +11,10 @@ export class TestSystem extends System {
   constructor(public ecs: ECS) {
     super();
     this.ecs.addQuery(this.queryContainers);
+
+    setTimeout(() => {
+      this.ramdomRemove();
+    }, 1000);
   }
 
   ramdomRemove() {

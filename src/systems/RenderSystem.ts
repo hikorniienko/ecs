@@ -21,10 +21,16 @@ export class RenderSystem extends System {
 
   getChildrenLabels(container: Container): string[] {
     const labels: string[] = [];
-    container.children.forEach((child) => {
-      labels.push(child.label);
-      labels.push(...this.getChildrenLabels(child));
-    });
+    const stack: Container[] = [container];
+
+    while (stack.length > 0) {
+      const current = stack.pop();
+      if (current) {
+        labels.push(current.label);
+        stack.push(...current.children);
+      }
+    }
+
     return labels;
   }
 
