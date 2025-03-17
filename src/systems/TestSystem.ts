@@ -14,7 +14,7 @@ export class TestSystem extends System {
 
     setTimeout(() => {
       this.ramdomRemove();
-    }, 1000);
+    }, 2000);
   }
 
   ramdomRemove() {
