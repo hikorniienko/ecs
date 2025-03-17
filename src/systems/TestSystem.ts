@@ -13,7 +13,7 @@ export class TestSystem extends System {
     this.ecs.addQuery(this.queryContainers);
 
     setTimeout(() => {
-      this.randomRemove();
+      this.ramdomRemove();
     }, 2000);
   }
 
