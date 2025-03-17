@@ -17,7 +17,7 @@ export class TestSystem extends System {
     }, 2000);
   }
 
-  ramdomRemove() {
+  randomRemove() {
     this.ecs.getQuery(this.queryContainers)?.forEach((entity) => {
       if (Math.random() > 0.75) {
         this.ecs.removeEntity(entity);
@@ -25,7 +25,7 @@ export class TestSystem extends System {
     });
 
     setTimeout(() => {
-      this.ramdomRemove();
+      this.randomRemove();
       this.randomAdd();
     }, 2000);
   }
